@@ -1,0 +1,17 @@
+{
+    "name": "lenovo/final-project",
+    "require": {
+        "phpoffice/phpspreadsheet": "^5.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lenovo\\FinalProject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MIqbalAjiNugroho",
+            "email": "if25.mnugroho@mhs.ubpkarawang.ac.id"
+        }
+    ]
+}
