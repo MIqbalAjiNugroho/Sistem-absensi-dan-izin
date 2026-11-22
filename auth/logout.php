@@ -1,4 +1,14 @@
 <?php
 // Hapus sesi lalu kembali ke login
 // Akses: login
-// TODO: isi nanti
+require __DIR__ . '/../config/koneksi.php';   // memulai sesi + BASE_URL
+
+$_SESSION = [];
+if (ini_get('session.use_cookies')) {
+    $p = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $p['path'], $p['domain'], $p['secure'], $p['httponly']);
+}
+session_destroy();
+
+header('Location: ' . BASE_URL . '/auth/login.php');
+exit;

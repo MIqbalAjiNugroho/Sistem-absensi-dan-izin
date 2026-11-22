@@ -1,16 +1,18 @@
-<?php 
-include 'includes/header.php';
+<?php
+// Beranda publik: hanya tombol Login. Kalau sudah login, langsung ke dashboard.
+require __DIR__ . '/config/koneksi.php';
+require __DIR__ . '/includes/fungsi.php';
+
+if (isset($_SESSION['id_user'])) {
+    redirect(url_dashboard($_SESSION['peran']));
+}
+
+$judul_halaman = 'Beranda';
+include __DIR__ . '/includes/header.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>DASBORD</h1>
-</body>
-</html>
-
+<section class="hero">
+    <h1>Sistem Absensi dan Izin Karyawan</h1>
+    <a class="tombol" href="<?= BASE_URL ?>/auth/login.php">Login</a>
+    <p class="keterangan">Absensi dengan scan QR dan validasi lokasi, serta pengajuan izin.</p>
+</section>
+<?php include __DIR__ . '/includes/footer.php'; ?>
