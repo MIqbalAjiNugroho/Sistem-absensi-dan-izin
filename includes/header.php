@@ -1,40 +1,30 @@
-<?php ?>
 <?php
-// Pembuka halaman: <head>, CSS, dan bar atas (hanya tampil setelah login)
+// Pembuka halaman: <head>, Bootstrap, dan style.css
 // Akses: internal
-//
-// Cara pakai:
-//   $judul_halaman = 'Dashboard';        // opsional
-//   include __DIR__ . '/../includes/header.php';
-//   ... isi halaman ...
-//   include __DIR__ . '/../includes/footer.php';
-
 require_once __DIR__ . '/../config/koneksi.php';
-require_once __DIR__ . '/fungsi.php';
 
 $judul_halaman = $judul_halaman ?? 'Beranda';
-
-// Dianggap login hanya jika id_user ada (bukan sekadar peran)
-$sudah_login = isset($_SESSION['id_user']);
-$peran = $sudah_login ? ($_SESSION['peran'] ?? null) : null;
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= h($judul_halaman) ?> | Sistem Absensi dan Izin</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
+    <title><?= htmlspecialchars($judul_halaman) ?> | Sistem Absensi dan Izin</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/assets/css/style.css" rel="stylesheet">
 </head>
-<body>
-<?php if ($peran): ?>
-<header class="header">
-    <nav class="menu">
-        <a href="<?= h(url_dashboard($peran)) ?>">Dashboard</a>
-        <span class="user"><?= h($_SESSION['nama'] ?? '') ?> (<?= h($peran) ?>)</span>
-        <a href="<?= BASE_URL ?>/auth/ganti_password.php">Ganti Password</a>
-        <a href="<?= BASE_URL ?>/auth/logout.php" class="keluar">Logout</a>
-    </nav>
-</header>
+<body class="d-flex flex-column min-vh-100">
+    <?php if (isset($_SESSION['id_user'])): ?>
+<nav class="navbar bg-white border-bottom">
+    <div class="container d-flex justify-content-end align-items-center gap-3 small">
+        <span class="badge rounded-pill pil-teal px-3 py-2">
+            <?= htmlspecialchars($_SESSION['nama'] ?? '') ?> &middot; <?= htmlspecialchars($_SESSION['peran'] ?? '') ?>
+        </span>
+        <a href="<?= BASE_URL ?>/auth/logout.php" class="btn btn-danger btn-sm fw-semibold">Logout</a>
+    </div>
+</nav>
 <?php endif; ?>
-<main class="konten">
+<main class="flex-grow-1">

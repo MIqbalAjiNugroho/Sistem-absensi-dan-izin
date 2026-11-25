@@ -1,4 +1,3 @@
-<?php ?>
 <?php
 require __DIR__ . '/../includes/auth_guard.php';
 wajib_login('admin');
