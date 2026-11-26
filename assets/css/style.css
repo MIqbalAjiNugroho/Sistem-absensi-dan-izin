@@ -1,1 +1,7 @@
-/* Gaya utama */
+.bg-beranda {
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    color: #fff;
+    border-radius: 1.25rem;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 .75rem 1.5rem rgba(13, 148, 136, .3);
+}
